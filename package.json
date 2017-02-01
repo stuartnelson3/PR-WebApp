@@ -1,0 +1,24 @@
+{
+  "name": "BMVZ-WebApp",
+  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+
+
+  "dependencies": {
+    "angular": "^1.4.9",
+    "angular-ui-router": "^0.2.17",
+    "bluebird": "^3.4.6",
+    "body-parser": "^1.10.2",
+    "express": "^4.14.0",
+    "pg-promise": "^5.3.5",
+    "sequelize": "~2.0.0",
+    "crypto": "~0.0.3"
+
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tom"
+}
