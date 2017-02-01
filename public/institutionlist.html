@@ -1,0 +1,294 @@
+<div class = "row">
+    <form name="FornFilter">
+    <div class="col-md-2">
+        <p><b>KV Region:</b></p>
+        <div
+             isteven-multi-select
+             input-model="KvSelect"
+             output-model="outputKv"
+             button-label="icon name"
+             item-label="icon name maker"
+             tick-property="ticked"
+             ...
+             group-property="msGroup"
+
+        >
+        </div>
+
+    </div>
+
+
+        <div class="col-md-2">
+            <p><b>PLZ:</b></p>
+            <div
+                    isteven-multi-select
+                    input-model="PLZ"
+                    output-model="outputPLZ"
+                    button-label="icon name"
+                    item-label="icon name maker"
+                    tick-property="ticked"
+                    ...
+                    group-property="msGroup"
+            >
+            </div>
+
+        </div>
+
+    <div class="col-md-2">
+        <p><b>Fächergruppen:</b></p>
+        <div
+                isteven-multi-select
+                input-model="Fachergruppen"
+                output-model="outputFachergruppen"
+                button-label="icon name"
+                item-label="icon name maker"
+                tick-property="ticked"
+        >
+        </div>
+
+    </div>
+
+        <div class="col-md-2">
+            <p><b>Ausrichtung:</b></p>
+            <div
+                    isteven-multi-select
+                    input-model="Ausrichtung"
+                    output-model="outputAusrichtung"
+                    button-label="icon name"
+                    item-label="icon name maker"
+                    tick-property="ticked"
+            >
+            </div>
+
+        </div>
+
+        <div class="col-md-2">
+            <p><b>Anzahl Ärzte:</b></p>
+            <div
+                    isteven-multi-select
+                    input-model="ArztAnzahl"
+                    output-model="outputArztAnzahl"
+                    button-label="icon name"
+                    item-label="icon name maker"
+                    tick-property="ticked"
+            >
+            </div>
+
+        </div>
+
+    </form>
+</div>
+
+<div align="right">
+    <!-- ng-href="#/institution/filter" <a class="btn btn-default" ng-click="onEmailVerteilerClick(institution)">Email-Verteiler</a> -->
+    <a align="right" class="btn btn-primary" ng-click="onFilterClick()"><span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Filter</a>
+</div>
+
+<div><hr></div>
+
+<div align="right">
+  <!--  <a class="btn btn-default" ng-click="onEmailVerteilerClick(institution)">Email-Verteiler</a>
+    <a align="right" class="btn btn-success" href="#/new/institution">Hinzufügen</a> -->
+</div>
+
+<div  >
+    <table class="table table-striped">
+        <thead>
+        <a align="left" class="btn btn-default" ng-click="onFilterClick()"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Select All</a>
+        &nbsp;
+        <a  ng-href="mailto:m.mustermann@domain.de" target="_blank" align="left" class="btn btn-default"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Send Email</a>
+        <!--   <p ng-repeat="institution in institutionlist" ng-bind="institution.institutionEmail + ($last ? '' : '; ')"> -->
+
+          <tr><th><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></th>
+              <th>KV Region</th>
+              <th>Name</th>
+              <th>Straße</th>
+              <th>PLZ</th>
+              <th>Ort</th>
+              <th>Email</th>
+              <th>Ansprechpartner</th>
+              <th>Website</th>
+              <th>
+                      <input class="form-control" width="auto" type="search" placeholder="Suche" ng-model="searchText">
+              </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+          </tr>
+          <tr ng-repeat="institution in institutionlist | orderBy:'InstitutionName' | filter:searchText">
+
+              <td>
+                  <input type="checkbox" value="">
+              <td>
+
+                    <span ng-if="!isEditing"
+                          class="institution__KvRegion">{{institution.institutionKvRegion}}
+                     </span>
+
+                  <form ng-submit="updateKvRegion(institution)">
+                      <input ng-if="isEditing"
+                             class="form-control institution_update-input-KvRegion"
+                             ng-value="institution.institutionKvRegion"
+                             ng-model="institution.updatedInstitutionKvRegion" />
+                  </form>
+
+              </td>
+
+              <td class="info">
+                     <span ng-if="!isEditing"
+                           class="institution__name">{{institution.institutionName}}
+                     </span>
+                  <form ng-submit="updateName(institution)">
+                      <input ng-if="isEditing"
+                             class="form-control institution_update-input-name"
+                             ng-value="institution.institutionName"
+                             ng-model="institution.updatedinstitutionName" />
+                  </form>
+              </td>
+
+              <td>
+                      <span ng-if="!isEditing"
+                            class="institution__Straße">{{institution.institutionStrasse}}
+                     </span>
+
+                  <form ng-submit="updateStrasse(institution)">
+                      <input ng-if="isEditing"
+                             class="form-control institution_update-input-Strasse"
+                             ng-value="institution.institutionStrasse"
+                             ng-model="institution.updatedinstitutionStrasse" />
+                  </form>
+              </td>
+
+              <td>
+                      <span ng-if="!isEditing"
+                            class="institution__PLZ">{{institution.institutionPLZ}}
+                     </span>
+
+                  <form ng-submit="updatePLZ(institution)">
+                      <input ng-if="isEditing"
+                             class="form-control institution_update-input-plz"
+                             ng-value="institution.institutionPLZ"
+                             ng-model="institution.updatedinstitutionPLZ" />
+                  </form>
+
+              </td>
+
+              <td>
+                    <span ng-if="!isEditing"
+                          class="institution__Ort">{{institution.institutionOrt}}
+                     </span>
+
+                  <form ng-submit="updateOrt(institution)">
+                      <input ng-if="isEditing"
+                             class="form-control institution_update-input-Ort"
+                             ng-value="institution.institutionOrt"
+                             ng-model="institution.updatedinstitutionOrt" />
+                  </form>
+              </td>
+              <td>
+                     <span ng-if="!isEditing"
+                           class="institution__email"><a ng-href="mailto:{{ institution.institutionEmail }}" target="_blank">
+                     {{institution.institutionEmail}}</a></span>
+
+                  <form ng-submit="updateEmail(institution)">
+                      <input ng-if="isEditing"
+                             class="form-control institution_update-input-email"
+                             ng-value="institution.institutionEmail"
+                             ng-model="institution.updatedInstitutionEmail" />
+                  </form>
+              </td>
+
+              <td>
+                    <span ng-if="!isEditing"
+                          class="institution__Ansprechpartner">
+                     {{institution.institutionAnsprechpartner}}</span>
+
+                  <form ng-submit="updateAnsprechpartner(institution)">
+                      <input ng-if="isEditing"
+                             class="form-control institution_update-input-Ansprechpartner"
+                             ng-value="institution.institutionAnsprechpartner"
+                             ng-model="institution.updatedinstitutionAnsprechpartner" />
+                  </form>
+              </td>
+
+              <td>
+
+                       <span ng-if="!isEditing"
+                                 class="institution__Website"><a href="{{institution.institutionWebsite}}" target="_blank">{{institution.institutionWebsite}}
+                      </a></span>
+
+                  <form ng-submit="updateWebsite(institution)">
+                      <input ng-if="isEditing"
+                             class="form-control institution_update-input-Website"
+                             ng-value="institution.institutionWebsite"
+                             ng-model="institution.updatedinstitutionWebsite" />
+                  </form>
+
+              </td>
+
+              <td align="right">
+              <a class="btn btn-warning" ng-href="#/institution/{{institution.institutionIdPk}}">View</a>
+
+                  <button ng-if="!isEditing"
+                          class="btn btn-info"
+                          ng-click="onEditClick(institution)">Edit
+                  </button>
+
+                  <button ng-if="isEditing"
+                          class="btn btn-primary"
+                          ng-click="onSaveClick(institution)">Save
+                  </button>
+
+                  <button ng-if="isEditing"
+                          class="btn btn-default"
+                          ng-click="onCancelClick(institution)">Cancel
+                  </button>
+              </td>
+
+          </tr>
+          </tbody>
+      </table>
+
+      <!--
+
+      TODO:Validation of Emails - 'ng-email-list'
+
+      <form name="myForm">
+          <div>
+              <h1>Allow Invalid</h1>
+              <ng-email-list ng-model="test" rejected="rejected" ng-model-options="{allowInvalid: true}"></ng-email-list>
+              <p>Emails: {{test}}</p>
+              <p>Rejected: {{rejected}}</p>
+          </div>
+          <div>
+              <h1>Disallow Invalid</h1>
+              <ng-email-list ng-model="test2" rejected="rejected2" ng-model-options="{allowInvalid: false}"></ng-email-list>
+              <p>Emails: {{test2}}</p>
+              <p>Rejected: {{rejected2}}</p>
+          </div>
+          <div ng-controller="repeats">
+              <h1>Disallow Repeats</h1>
+              <p>This has an array of repeats.</p>
+              <ng-email-list ng-model="test3" rejected="rejected3" repeat="repeat" ng-model-options="{allowInvalid: true}"></ng-email-list>
+              <p>Emails: {{test3}}</p>
+              <p>Rejected: {{rejected3}}</p>
+              <p>Repeats: {{repeat}}</p>
+          </div>
+          <form name="testRepeats">
+              <p>This has norepeat set</p>
+              <ng-email-list name="hasRepeats" ng-model="test5" rejected="rejected5" norepeat model-options="{allowInvalid: true}"></ng-email-list>
+              <p>Emails: {{test5}}</p>
+              <p>hasRepeats : {{testRepeats.hasRepeats.$error.repeat}}</p>
+          </form>
+          <div>
+          </div>
+          <div ng-controller="prefill">
+              <h1>Prefilled values</h1>
+              <ng-email-list ng-model="test4" rejected="rejected4" ng-model-options="{allowInvalid: true}"></ng-email-list>
+              <p>Emails: {{test4}}</p>
+              <p>Rejected: {{rejected4}}</p>
+          </div>
+      </form>  -->
+
+</div>

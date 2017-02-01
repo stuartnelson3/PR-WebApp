@@ -1,0 +1,47 @@
+<div class="row" ng-hide="institution.institutionIdPk">
+    <div class="col-md-6">
+        <h2>New Institution</h2>
+    </div>
+</div>
+<div class="container">
+    <div>
+        <p>
+            <label>KV Region</label>
+            <input id="kvRegion" class="form-control" type="text" ng-model="institution.institutionKvRegion" required>
+        </p>
+        <p>
+            <label>Name</label>
+            <input id="name" class="form-control" type="text" ng-model="institution.institutionName" required>
+        </p>
+        <p>
+            <label>Straße</label>
+            <input id="strasse" class="form-control" type="text" ng-model="institution.institutionStrasse" required>
+        </p>
+        <p>
+            <label>PLZ</label>
+            <input id="plz" class="form-control" type="text" ng-model="institution.institutionPLZ" required>
+        </p>
+        <p>
+            <label>Ort</label>
+            <input id="ort" class="form-control" type="text" ng-model="institution.institutionOrt" required>
+        </p>
+        <p>
+            <label>Email</label>
+            <input id="email" class="form-control" type="text" ng-model="institution.institutionEmail" required>
+        </p>
+        <p>
+            <label>Ansprechpartner</label>
+            <input id="ansprechpartner" class="form-control" type="text" ng-model="institution.institutionAnsprechpartner" required>
+        </p>
+        <p>
+            <label>Website</label>
+            <input id="website" class="form-control" type="text" ng-model="institution.institutionWebsite" required>
+        </p>
+        <p>
+            <a href="#/"><button style="margin-top:20px" class="btn btn-success" ng-click="saveInstitution(institution)">Save</button></a>
+            <button style="margin-top:20px" class="btn btn-default" ng-click="back()">Back</button>
+        </p>
+    </div>
+</div>
+</body>
+</html>

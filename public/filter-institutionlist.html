@@ -1,0 +1,152 @@
+
+<div  >
+    <table class="table">
+        <thead>
+        <tr>
+            <th>KV Region</th>
+            <th>Name</th>
+            <th>Straße</th>
+            <th>Ort</th>
+            <th>PLZ</th>
+            <th>Email</th>
+            <th>Ansprechpartner</th>
+            <th>Website</th>
+            <th>
+                <input class="form-control" width="auto" type="search" placeholder="Suche" ng-model="searchText">
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        </tr>
+        <tr ng-repeat="institution in institutionlist | orderBy:'InstitutionName' | filter:searchText">
+
+            <td>
+                  <span ng-if="!isEditing"
+                        class="institution__KvRegion">{{institution.institutionKvRegion}}
+                   </span>
+
+                <form ng-submit="updateKvRegion(institution)">
+                    <input ng-if="isEditing"
+                           class="form-control institution_update-input-KvRegion"
+                           ng-value="institution.institutionKvRegion"
+                           ng-model="institution.updatedInstitutionKvRegion" />
+                </form>
+
+            </td>
+
+            <td>
+                   <span ng-if="!isEditing"
+                         class="institution__name">{{institution.institutionName}}
+                   </span>
+
+                <form ng-submit="updateName(institution)">
+                    <input ng-if="isEditing"
+                           class="form-control institution_update-input-name"
+                           ng-value="institution.institutionName"
+                           ng-model="institution.updatedinstitutionName" />
+                </form>
+            </td>
+
+            <td>
+                    <span ng-if="!isEditing"
+                          class="institution__Straße">{{institution.institutionStrasse}}
+                   </span>
+
+                <form ng-submit="updateStrasse(institution)">
+                    <input ng-if="isEditing"
+                           class="form-control institution_update-input-Strasse"
+                           ng-value="institution.institutionStrasse"
+                           ng-model="institution.updatedinstitutionStrasse" />
+                </form>
+            </td>
+
+            <td>
+                    <span ng-if="!isEditing"
+                          class="institution__PLZ">{{institution.institutionPLZ}}
+                   </span>
+
+                <form ng-submit="updatePLZ(institution)">
+                    <input ng-if="isEditing"
+                           class="form-control institution_update-input-plz"
+                           ng-value="institution.institutionPLZ"
+                           ng-model="institution.updatedinstitutionPLZ" />
+                </form>
+
+            </td>
+
+            <td>
+                  <span ng-if="!isEditing"
+                        class="institution__Ort">{{institution.institutionOrt}}
+                   </span>
+
+                <form ng-submit="updateOrt(institution)">
+                    <input ng-if="isEditing"
+                           class="form-control institution_update-input-Ort"
+                           ng-value="institution.institutionOrt"
+                           ng-model="institution.updatedinstitutionOrt" />
+                </form>
+            </td>
+            <td>
+                   <span ng-if="!isEditing"
+                         class="institution__email"><a ng-href="mailto:{{ institution.institutionEmail }}" target="_blank">
+                   {{institution.institutionEmail}}</a></span>
+
+                <form ng-submit="updateEmail(institution)">
+                    <input ng-if="isEditing"
+                           class="form-control institution_update-input-email"
+                           ng-value="institution.institutionEmail"
+                           ng-model="institution.updatedInstitutionEmail" />
+                </form>
+            </td>
+
+            <td>
+                  <span ng-if="!isEditing"
+                        class="institution__Ansprechpartner">
+                   {{institution.institutionAnsprechpartner}}</span>
+
+                <form ng-submit="updateAnsprechpartner(institution)">
+                    <input ng-if="isEditing"
+                           class="form-control institution_update-input-Ansprechpartner"
+                           ng-value="institution.institutionAnsprechpartner"
+                           ng-model="institution.updatedinstitutionAnsprechpartner" />
+                </form>
+            </td>
+
+            <td>
+
+                     <span ng-if="!isEditing"
+                           class="institution__Website"><a href="{{institution.institutionWebsite}}" target="_blank">{{institution.institutionWebsite}}
+                    </a></span>
+
+                <form ng-submit="updateWebsite(institution)">
+                    <input ng-if="isEditing"
+                           class="form-control institution_update-input-Website"
+                           ng-value="institution.institutionWebsite"
+                           ng-model="institution.updatedinstitutionWebsite" />
+                </form>
+
+            </td>
+
+            <td align="right">
+                <a class="btn btn-warning" ng-href="#/institution/{{institution.institutionIdPk}}">View</a>
+
+                <button ng-if="!isEditing"
+                        class="btn btn-info"
+                        ng-click="onEditClick(institution)">Edit
+                </button>
+
+                <button ng-if="isEditing"
+                        class="btn btn-primary"
+                        ng-click="onSaveClick(institution)">Save
+                </button>
+
+                <button ng-if="isEditing"
+                        class="btn btn-default"
+                        ng-click="onCancelClick(institution)">Cancel
+                </button>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>

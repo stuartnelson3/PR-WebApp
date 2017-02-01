@@ -1,0 +1,33 @@
+<div class = "row">
+    <div class="col-md-6">
+        <h2>
+            {{ institution.institutionName }}
+        </h2>
+    </div>
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-2">
+        <a href="#/"><button class="btn btn-danger" ng-click="deleteInstitution(institution.institutionIdPk)">Delete</button></a>
+    </div>
+    <div class="col-md-1">
+    </div>
+</div>
+<div ng-hide="editMode" class="container">
+    <div>
+        <p ng-if="institution.institutionKvRegion">KV Region: {{ institution.institutionKvRegion }}</a></p>
+        <p ng-if="institution.institutionName">Name: {{ institution.institutionName }}</a></p>
+        <p ng-if="institution.institutionStrasse">Straße: {{ institution.institutionStrasse }} </p>
+        <p ng-if="institution.institutionPLZ">PLZ: {{ institution.institutionPLZ }} </p>
+        <p ng-if="institution.institutionOrt">Ort: {{ institution.institutionOrt }} </p>
+        <p ng-if="institution.institutionEmail">Email: <a ng-href="mailto:{{ institution.institutionEmail }}" target="_blank">{{ institution.institutionEmail }}</a></p>
+        <p ng-if="institution.institutionAnsprechpartner">Ansprechpartner: {{ institution.institutionAnsprechpartner }} </p>
+        <p ng-if="institution.institutionWebsite">Website: <a ng-href="mailto:{{ institution.institutionWebsite }}"> {{ institution.institutionWebsite }} </a></p>
+        <p>
+            <button style="margin-top:20px" class="btn btn-info" ng-click="toggleEdit()">Edit</button>
+            <a style="margin-top:20px" class="btn btn-default" href="#/">Back</a>
+        </p>
+    </div>
+</div>
+<!-- Contact form -->
+<div ng-include="institutionFormUrl">
+</div>
