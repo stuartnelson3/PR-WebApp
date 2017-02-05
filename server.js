@@ -5,6 +5,7 @@ var mysql = require('mysql');
 var bodyParser = require('body-parser');
 var http = require('http');
 var path = require('path');
+var url = require('url');
 
 
 
@@ -36,15 +37,49 @@ app.use(bodyParser.json());
 
     // getAllInstitutions
     app.get('/institutionlist', function (req, res) {
+      // Parse out query string
+      // /institutionlist?ort=Berlin&ort=Koeln
+      var queryData = url.parse(req.url, true).query;
 
-        console.log('I received a GET request');
+      // {"ort":["Berlin","Koeln"]}
+      console.log(queryData)
+      // sanitize query string
+      // use query values in mysql query
 
-        connection.query('SELECT institutionIdPk, institutionKvRegion, institutionName, institutionStrasse, institutionPLZ, institutionOrt, ' +
-            'institutionEmail, institutionAnsprechpartner, institutionWebsite  FROM tblInstitution', function(err, doc) {
 
-            res.json(doc);
+      // filter region + plz
+      var whiteList = ['ort', 'plz'];
+      var conditions = [];
+      var mysqlQuery = 'SELECT institutionIdPk, institutionKvRegion, institutionName, institutionStrasse, institutionPLZ, institutionOrt, institutionEmail, institutionAnsprechpartner, institutionWebsite  FROM tblInstitution';
 
-        });
+      for (key in queryData) {
+        // Check that the key is ort or plz, and that the value exists.
+        var data = queryData[key];
+        if (whiteList.indexOf(key) > -1 && data) {
+          // WHERE key=value AND key2=value2
+          // {"ort":["Berlin","Koeln"]}
+          if (data.constructor === Array) {
+            var temp = [];
+            data.forEach(function(d) {
+              temp.push(key + '=' + d);
+            });
+            conditions.push('(' + temp.join(' OR ') + ')');
+            continue;
+          }
+          conditions.push(key + '=' + data);
+        }
+      }
+
+      if (conditions.length > 0) {
+        mysqlQuery += ' WHERE ' + conditions.join(' AND ');
+      }
+
+      console.log(mysqlQuery);
+      connection.query(mysqlQuery, function(err, doc) {
+
+        res.json(doc);
+
+      });
 
     });
 
