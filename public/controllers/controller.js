@@ -108,7 +108,7 @@ angular.module("InstitutionCRUDApp", ['ngRoute', 'isteven-multi-select'])
 
 
     // Show/Filter Institutionlist
-    .controller("InstitutionController", function(institutionlist, $scope) {
+    .controller("InstitutionController", function(institutionlist, $scope, $http) {
 
 
         // Mutltiselect KV
@@ -302,6 +302,7 @@ angular.module("InstitutionCRUDApp", ['ngRoute', 'isteven-multi-select'])
 
         //Filter Button
         $scope.onFilterClick = function() {
+            var parameters = {};
 
             $scope.institutionlist = institutionlist.data;
 
@@ -311,13 +312,20 @@ angular.module("InstitutionCRUDApp", ['ngRoute', 'isteven-multi-select'])
 
 
             //Get the data from Multiselect
+          parameters['institutionKvRegion'] = parameters['institutionKvRegion'] || [];
             angular.forEach( $scope.outputKv, function( value, key ) {
-                console.log(value.name)
+              // Need to set multiple values
+              if (value.ticked) {
+                parameters['institutionKvRegion'].push(value.name);
+              }
             });
 
             //Get the data from Multiselect
+          parameters['institutionPLZ'] = parameters['institutionPLZ'] || [];
             angular.forEach( $scope.outputPLZ, function( value, key ) {
-                console.log(value.name)
+              if (value.ticked) {
+                parameters['institutionPLZ'].push(value.name);
+              }
             });
 
             //Get the data from Multiselect
@@ -332,6 +340,13 @@ angular.module("InstitutionCRUDApp", ['ngRoute', 'isteven-multi-select'])
 
             angular.forEach( $scope.outputArztAnzahl, function( value, key ) {
                 console.log(value.name)
+            });
+
+          $http.get('/institutionlist', {params: parameters}).
+            then(function(response) {
+              return response;
+            }, function(response) {
+              alert("Error finding Institutionlist.");
             });
 
         };

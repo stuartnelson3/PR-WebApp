@@ -48,7 +48,7 @@ app.use(bodyParser.json());
 
 
       // filter region + plz
-      var whiteList = ['ort', 'plz'];
+      var whiteList = ['institutionPLZ', 'institutionKvRegion'];
       var conditions = [];
       var mysqlQuery = 'SELECT institutionIdPk, institutionKvRegion, institutionName, institutionStrasse, institutionPLZ, institutionOrt, institutionEmail, institutionAnsprechpartner, institutionWebsite  FROM tblInstitution';
 
@@ -61,12 +61,12 @@ app.use(bodyParser.json());
           if (data.constructor === Array) {
             var temp = [];
             data.forEach(function(d) {
-              temp.push(key + '=' + d);
+              temp.push(key + '=' + "'" + d + "'");
             });
             conditions.push('(' + temp.join(' OR ') + ')');
             continue;
           }
-          conditions.push(key + '=' + data);
+          conditions.push(key + '=' + "'" + data + "'");
         }
       }
 
